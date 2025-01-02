@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     min-height: 100vh;  
     background-color: ${({theme}) => theme.colors.green100 };
-    color: #e1e1e6;
+    color: ${({theme}) => theme.colors.gray500};
     -webkit-font-smoothing: antialiased;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;

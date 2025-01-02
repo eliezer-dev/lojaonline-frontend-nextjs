@@ -6,7 +6,6 @@ import ProductView from "./components/productsView";
 
 async function fetchProducts():Promise<ProductProps[]>  {
   const response = await api.get<ProductProps[]>('/products') 
-  console.log(response.data)
   return response.data
 }
 
@@ -21,9 +20,14 @@ export interface ProductProps {
 	createAt: Date,
 	updateAt: Date,
 	active: boolean,
-	images: [],
+	images: ImageProps[],
 	productType: string,
 	compositeItems: []
+}
+
+export interface ImageProps {
+	id: number,
+	link: string,
 }
 
 
@@ -39,15 +43,18 @@ export default async function Home() {
   return (
     <HomeContainer>
 		<HortaSection>
-			{
-				products && products.map((prod) => {
-					return (
-						<ProductView key={prod.id} product = {prod}/>
-					)
-				})
-			}
+			<h1>Hortifruti</h1>
+			<div className="products_list">
+				{
+					products && products.map((prod) => {
+						return (
+							<ProductView key={prod.id} product = {prod}/>
+						)
+					})
+				}
+			</div>
 		</HortaSection>
-      <h1>Pagina home</h1>
+
     </HomeContainer>
   );
 }
