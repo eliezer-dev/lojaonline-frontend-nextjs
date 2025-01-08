@@ -7,13 +7,36 @@ export const ProductViewContainer = styled.div`
     background-color: white;
     width: 100%;
     max-width: 225px;
-    max-height: 357px;
+    height: 357px;
     border: 1px solid ${({theme}) => theme.colors.gray300};
     padding: 1rem;
     display: flex;
-    gap: 3rem;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    justify-content: space-between;
+
+    .product_image_description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 191px;
+        justify-content: space-between;
+        gap: 1rem;
+
+        p {
+            height: 57px;
+            align-items: center;
+        }
+    }
+
+    .product_price_button  {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     .product_description {
         color: ${({theme}) => theme.colors.gray800};

@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
 export const ButtonContainer = styled.button`
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
     background-color: ${({ theme }) => theme.colors.green500};
     width: 100%;
-    height: 36px;
+    height: 42px;
     color: ${({ theme }) => theme.colors.white};
     font-size: ${({ theme }) => theme.fontSizes.md};
     font-weight: bold;

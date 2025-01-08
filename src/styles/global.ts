@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    overflow-x: auto;
     min-height: 100vh;  
     background-color: ${({theme}) => theme.colors.green100 };
     color: ${({theme}) => theme.colors.gray500};

@@ -6,10 +6,10 @@ export const HomeContainer = styled.div`
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    overflow-x: auto;
+    overflow: hidden;
 `;
 
-export const HortaSection = styled.section`
+export const ProductSection = styled.section`
   display: flex;
   flex-direction: column;
 
