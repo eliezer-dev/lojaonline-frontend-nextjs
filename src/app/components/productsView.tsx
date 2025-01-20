@@ -10,10 +10,10 @@ import { formatToBRL } from "@/util/geral";
 import Button from "@/ui/button/button";
 import { CiShoppingCart } from "react-icons/ci";
 
-
 export default function ProductView({product}:{product: ProductProps}) {
   const [productState, setProductState] = useState<ProductProps>()
-  
+//   const { addProductToCart, handleCartDetails } = useData();
+
   useEffect(() => {
 
     if (product != null) {
@@ -24,9 +24,11 @@ export default function ProductView({product}:{product: ProductProps}) {
 
   return (
   <>
+  
     {
       productState && 
       <ProductViewContainer>
+        
         <div className='product_image_description'>
           {
             productState.images.length > 0 ?  

@@ -4,13 +4,15 @@ import StyledComponentsRegistry from "@/lib/registry"
 import {GlobalStyles} from "@/styles/global";
 import {ThemeProvider} from "styled-components";
 import {theme} from "@/styles";
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 function Providers(props: React.PropsWithChildren) {
     return (
         <StyledComponentsRegistry>
             <ThemeProvider theme={theme}>
                 <GlobalStyles />
-                {props.children}
+                <AntdRegistry>{props.children}</AntdRegistry>
+                
             </ThemeProvider>
         </StyledComponentsRegistry>
     )

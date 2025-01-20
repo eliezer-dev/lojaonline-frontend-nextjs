@@ -1,123 +1,55 @@
+"use server"
+
 import Image from "next/image";
-import { HomeContainer, ProductSection } from "./styles";
+import { HomeContainer } from "./styles";
 import api from "@/lib/api";
 import ProductView from "./components/productsView";
-
-
-async function fetchProducts(categoryId:number):Promise<ProductProps[]>  {
-  const response = await api.get<ProductProps[]>(`/products?categoryId=${categoryId}`) 
-  return response.data
-}
-
-async function fetchProductsOtherCategories():Promise<ProductProps[]>  {
-	const response = await api.get<ProductProps[]>(`/products?otherCategories=true`) 
-	return response.data
-  }
-
-async function fetchCategories():Promise<CategoryProps[]>  {
-  const response = await api.get<CategoryProps[]>('/products/categories?visibleHome=true') 
-  return response.data
-}
-
-export interface ProductProps {
-  	id: number,
-	name: string,
-	description?:string,
-	sku: string,
-	price: number,
-	stock_quantity: number,
-	weight: number,
-	createAt: Date,
-	updateAt: Date,
-	active: boolean,
-	images: ImageProps[],
-	productType: string,
-	compositeItems: []
-}
-
-export interface ImageProps {
-	id: number,
-	link: string,
-}
-
-export interface CategoryProps {
-	id: number,
-	description: string,
-	parentCategoryId: number,
-	visibleHome: boolean
-}
-
+import { Button , DatePicker} from 'antd';
+import { AutoComplete } from "antd";
+import InputSearch from "@/ui/inputSearch/inputSearch";
+import ProductSearch from "./components/productSearch/productSearch";
+import { SearchProvider } from "@/context/SearchContext";
+import ProductListView from "./components/productListView/productListView";
+import { ProductResponse } from "@/types/product-types";
+import { GetProductByOtherCategories, GetProductByCategory } from "./api/actions/products";
 
 
 export default async function Home() {
-  let productsCategoryHortifruti:ProductProps[] = []
-  let productsCategoryBiscoitosCereais:ProductProps[] = []
-  let productsCategoryLeitesVegetais:ProductProps[] = []
-  let productsCategoryOtherProducts:ProductProps[] = []
-  let categories:CategoryProps[] = []
+
+  let productsByName:ProductResponse[] = []
+  let productsCategoryHortifruti:ProductResponse[] = []
+  let productsCategoryBiscoitosCereais:ProductResponse[] = []
+  let productsCategoryLeitesVegetais:ProductResponse[] = []
+  let productsCategoryOtherProducts:ProductResponse[] = []
+
+
 
   try {
 	//categories = await fetchCategories()
-	productsCategoryHortifruti = await fetchProducts(1)
-	productsCategoryBiscoitosCereais = await fetchProducts(2)
-	productsCategoryLeitesVegetais = await fetchProducts(3)
-	productsCategoryOtherProducts = await fetchProductsOtherCategories()
+	productsCategoryHortifruti = await GetProductByCategory(1)
+	productsCategoryBiscoitosCereais = await GetProductByCategory(2)
+	productsCategoryLeitesVegetais = await GetProductByCategory(3)
+	productsCategoryOtherProducts = await GetProductByOtherCategories()
   } catch (error) {
 	throw new Error('Erro ao buscar produtos')
   }
 
+
+
   return (
-    <HomeContainer>
-		<ProductSection>
-			<h1>Hortifruti</h1>
-			<div className="products_list">
-				{
-					productsCategoryHortifruti && productsCategoryHortifruti.map((prod) => {
-						return (
-							<ProductView key={prod.id} product = {prod}/>
-						)
-					})
-				}
-			</div>
-		</ProductSection>
-		<ProductSection>
-			<h1>Biscoitos e Cereias Sem Glútem e Sem Lactose</h1>
-			<div className="products_list">
-				{
-					productsCategoryBiscoitosCereais && productsCategoryBiscoitosCereais.map((prod) => {
-						return (
-							<ProductView key={prod.id} product = {prod}/>
-						)
-					})
-				}
-			</div>
-		</ProductSection>
-		<ProductSection>
-			<h1>Leites Vegetais</h1>
-			<div className="products_list">
-				{
-					productsCategoryLeitesVegetais && productsCategoryLeitesVegetais.map((prod) => {
-						return (
-							<ProductView key={prod.id} product = {prod}/>
-						)
-					})
-				}
-			</div>
-		</ProductSection>
-		<ProductSection>
-			<h1>Outros Produtos S/Glutém e Sem Lactose</h1>
-			<div className="products_list">
-				{
-					productsCategoryOtherProducts && productsCategoryOtherProducts.map((prod) => {
-						return (
-							<ProductView key={prod.id} product = {prod}/>
-						)
-					})
-				}
-			</div>
-		</ProductSection>
+    <SearchProvider>
+        <HomeContainer>
+            <InputSearch/>
+            <ProductSearch/>
+            <ProductListView 
+                productsCategoryHortifruti={productsCategoryHortifruti} 
+                productsCategoryBiscoitosCereais={productsCategoryBiscoitosCereais} 
+                productsCategoryLeitesVegetais={productsCategoryLeitesVegetais} 
+                productsCategoryOtherProducts={productsCategoryOtherProducts} 
+            />
 
-
-    </HomeContainer>
+        </HomeContainer>
+    </SearchProvider>
   );
 }
+

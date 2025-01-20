@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     styledComponents: true,
 },
 
-  reactStrictMode: true,
+  reactStrictMode: false,
 
   images: {
     remotePatterns: [
