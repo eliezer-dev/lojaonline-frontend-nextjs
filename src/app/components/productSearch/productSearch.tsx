@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { ProductSearchContainer } from "./styles"
-import {useData} from "@/context/SearchContext";
+import {useSearchContext} from "@/context/SearchContext";
 import { ProductResponse } from "@/types/product-types";
 import { GetProductByName } from "@/app/api/actions/products";
-import ProductView from "../productsView";
+import ProductView from "../productsView/productsView";
 
 
 export default function ProductSearch() {
     
-    const { searchQuery } = useData();
+    const { searchQuery } = useSearchContext();
     const [products, setProducts] = useState<ProductResponse[]>([]);
 
     

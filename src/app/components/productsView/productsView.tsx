@@ -2,16 +2,15 @@
 
 import Image from "next/image";
 import { ProductViewContainer } from "./styles";
-import api from "@/lib/api";
-import { ProductProps } from "../page";
 import { useEffect, useState } from "react";
 import imageNotFound from "@/assets/imageNotFound.png";
 import { formatToBRL } from "@/util/geral";
 import Button from "@/ui/button/button";
 import { CiShoppingCart } from "react-icons/ci";
+import {ProductResponse} from "@/types/product-types";
 
-export default function ProductView({product}:{product: ProductProps}) {
-  const [productState, setProductState] = useState<ProductProps>()
+export default function ProductView({product}:{product: ProductResponse}) {
+  const [productState, setProductState] = useState<ProductResponse>()
 //   const { addProductToCart, handleCartDetails } = useData();
 
   useEffect(() => {

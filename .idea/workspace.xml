@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="" />
+    <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/api/actions/category.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/productGroupByCategoryResponse-types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/actions/products.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/actions/products.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/header/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/productListView/productListView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/productListView/productListView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/productSearch/productSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/productSearch/productSearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/productsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/productsView/productsView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/productsView/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/context/SearchContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/SearchContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/category-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/category-types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/inputSearch/inputSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/inputSearch/inputSearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/inputSearch/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/inputSearch/styles.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,27 +54,67 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/eliezer/code/lojaonline-frontend-nextjs",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/home/eliezer/code/lojaonline-frontend-nextjs/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.Javascript Debug.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/eliezer/code/lojaonline-frontend-nextjs&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next JS Run.executor&quot;: &quot;Run&quot;,
+    &quot;npm.NextJS Debug.executor&quot;: &quot;Debug&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/eliezer/code/lojaonline-frontend-nextjs/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager" selected="npm.NextJS Debug">
+    <configuration name="Javascript Debug" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next JS Run" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <EXTENSION ID="com.intellij.lang.javascript.buildTools.npm.rc.StartBrowserRunConfigurationExtension">
+        <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" start="true" url="http://localhost:3000" />
+      </EXTENSION>
+      <method v="2" />
+    </configuration>
+    <configuration name="NextJS Debug" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <EXTENSION ID="com.intellij.lang.javascript.buildTools.npm.rc.StartBrowserRunConfigurationExtension">
+        <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" start="true" with-js-debugger="true" url="http://localhost:3000" />
+      </EXTENSION>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Javascript Debug" />
+      <item itemvalue="npm.Next JS Run" />
+      <item itemvalue="npm.NextJS Debug" />
+    </list>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.153" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.153" />
       </set>
     </attachedChunks>
   </component>
@@ -69,6 +130,19 @@
       <workItem from="1735608481067" duration="736000" />
       <workItem from="1735666924519" duration="351000" />
       <workItem from="1736330883963" duration="83000" />
+      <workItem from="1737418700301" duration="887000" />
+      <workItem from="1737420411216" duration="75000" />
+      <workItem from="1737420562702" duration="3248000" />
+      <workItem from="1737424230802" duration="223000" />
+      <workItem from="1737424556823" duration="26000" />
+      <workItem from="1737761296365" duration="1060000" />
+      <workItem from="1737765586460" duration="11840000" />
+      <workItem from="1738019389036" duration="289000" />
+      <workItem from="1738024496902" duration="154000" />
+      <workItem from="1738024688312" duration="2885000" />
+      <workItem from="1738079202219" duration="1430000" />
+      <workItem from="1738145647817" duration="890000" />
+      <workItem from="1738281026216" duration="3144000" />
     </task>
     <servers />
   </component>

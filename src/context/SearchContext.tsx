@@ -61,10 +61,10 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
 
 
 
-export const useData = (): SearchContextType => {
+export const useSearchContext = (): SearchContextType => {
     const context = useContext(SearchContext);
     if (!context) {
-        throw new Error('useData must be used within a DataProvider');
+        throw new Error('useSearchContext must be used within a SearchProvider');
     }
     return context;
 };

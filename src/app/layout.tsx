@@ -3,6 +3,8 @@ import { DataProvider } from "@/context/DataContext";
 import Providers from "@/providers";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import  '@ant-design/v5-patch-for-react-19';
+import Header from "@/app/components/header/header";
+import {SearchProvider} from "@/context/SearchContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +29,10 @@ export default function RootLayout({
       <body>
       <DataProvider>
         <Providers>
-              {children}
+            <SearchProvider>
+                <Header/>
+                {children}
+            </SearchProvider>
         </Providers>
       </DataProvider>
       </body>

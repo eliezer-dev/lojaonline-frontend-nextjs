@@ -2,32 +2,39 @@
 
 import { AutoComplete, Input} from "antd";
 import { InputSearchContainer } from "./styles";
-import {useData} from "@/context/SearchContext";
+import {useSearchContext} from "@/context/SearchContext";
+import {SearchOutlined} from "@ant-design/icons";
 
 
 export  default function InputSearch () {
     // const { icon: Icon, title, onClick, disabled } = props;
     const {Search} = Input
-    const { searchQuery, handleSearchContext } = useData();
+    const { searchQuery, handleSearchContext } = useSearchContext();
 
 
     return(
         <InputSearchContainer>
-        <AutoComplete
-        // popupClassName="certain-category-search-dropdown"
-        // popupMatchSelectWidth={500}
-        style={{
-          width: 250,
-        }}
-        // options={options}
-        // size="large"
-      >
-        <Search 
-            size="large" 
-            placeholder="Digite o produto aqui" 
-            onChange={(event) => handleSearchContext(event.target.value)}
-        />
-      </AutoComplete>
+            <Input
+                size="large"
+                placeholder="Pesquise por produtos"
+                prefix={<SearchOutlined />}
+                addonAfter='Buscar'
+                variant="borderless"
+                className="header_input_search"
+
+            />
+        {/*<AutoComplete*/}
+        {/*// popupClassName="certain-category-search-dropdown"*/}
+        {/*// popupMatchSelectWidth={500}*/}
+        {/*style={{*/}
+        {/*  width: '100%',*/}
+        {/*    height: '48'*/}
+        {/*}}*/}
+        {/*// options={options}*/}
+        {/*// size="large"*/}
+        {/*>*/}
+
+      {/*</AutoComplete>*/}
       </InputSearchContainer>
     )
 }

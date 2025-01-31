@@ -1,7 +1,6 @@
 
-export interface CategoryProps {
-	id: number,
-	description: string,
-	parentCategoryId: number,
-	visibleHome: boolean
+export interface CategoryResponse {
+	categoryId: number,
+    descriptionMenu: string,
+    orderMenu: number,
 }

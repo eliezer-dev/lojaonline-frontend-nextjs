@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { HomeContainer } from "./styles";
 import api from "@/lib/api";
-import ProductView from "./components/productsView";
+import ProductView from "./components/productsView/productsView";
 import { Button , DatePicker} from 'antd';
 import { AutoComplete } from "antd";
 import InputSearch from "@/ui/inputSearch/inputSearch";
@@ -11,25 +11,19 @@ import ProductSearch from "./components/productSearch/productSearch";
 import { SearchProvider } from "@/context/SearchContext";
 import ProductListView from "./components/productListView/productListView";
 import { ProductResponse } from "@/types/product-types";
-import { GetProductByOtherCategories, GetProductByCategory } from "./api/actions/products";
+import {
+    GetProductAllCategoryWithProducts
+} from "./api/actions/products";
+import {ProductGroupByCategoryResponse} from "@/types/productGroupByCategoryResponse-types";
 
 
 export default async function Home() {
-
-  let productsByName:ProductResponse[] = []
-  let productsCategoryHortifruti:ProductResponse[] = []
-  let productsCategoryBiscoitosCereais:ProductResponse[] = []
-  let productsCategoryLeitesVegetais:ProductResponse[] = []
-  let productsCategoryOtherProducts:ProductResponse[] = []
-
-
-
+    
+  let productsGroupByCategories:ProductGroupByCategoryResponse[] = []
+    
   try {
-	//categories = await fetchCategories()
-	productsCategoryHortifruti = await GetProductByCategory(1)
-	productsCategoryBiscoitosCereais = await GetProductByCategory(2)
-	productsCategoryLeitesVegetais = await GetProductByCategory(3)
-	productsCategoryOtherProducts = await GetProductByOtherCategories()
+      productsGroupByCategories  = await GetProductAllCategoryWithProducts(true)
+	
   } catch (error) {
 	throw new Error('Erro ao buscar produtos')
   }
@@ -37,19 +31,13 @@ export default async function Home() {
 
 
   return (
-    <SearchProvider>
         <HomeContainer>
-            <InputSearch/>
             <ProductSearch/>
-            <ProductListView 
-                productsCategoryHortifruti={productsCategoryHortifruti} 
-                productsCategoryBiscoitosCereais={productsCategoryBiscoitosCereais} 
-                productsCategoryLeitesVegetais={productsCategoryLeitesVegetais} 
-                productsCategoryOtherProducts={productsCategoryOtherProducts} 
+            <ProductListView
+                productsGroupByCategories={productsGroupByCategories}
             />
 
         </HomeContainer>
-    </SearchProvider>
   );
 }
 

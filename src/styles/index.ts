@@ -9,6 +9,7 @@ export const theme = {
 
         green500: '#00875f',
         green300: '#00b37e',
+        green200: '#e5fbe4b5',
         green100: '#f2f7f5',
     },
 

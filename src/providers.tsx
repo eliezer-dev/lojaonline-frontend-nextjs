@@ -12,6 +12,7 @@ function Providers(props: React.PropsWithChildren) {
             <ThemeProvider theme={theme}>
                 <GlobalStyles />
                 <AntdRegistry>{props.children}</AntdRegistry>
+
                 
             </ThemeProvider>
         </StyledComponentsRegistry>
