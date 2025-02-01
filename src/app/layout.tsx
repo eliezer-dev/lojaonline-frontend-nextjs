@@ -5,6 +5,7 @@ import { AntdRegistry } from '@ant-design/nextjs-registry';
 import  '@ant-design/v5-patch-for-react-19';
 import Header from "@/app/components/header/header";
 import {SearchProvider} from "@/context/SearchContext";
+import Footer from "@/app/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,6 +33,7 @@ export default function RootLayout({
             <SearchProvider>
                 <Header/>
                 {children}
+                <Footer/>
             </SearchProvider>
         </Providers>
       </DataProvider>

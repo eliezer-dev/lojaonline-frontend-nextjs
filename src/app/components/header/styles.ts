@@ -2,6 +2,7 @@
 
 import styled from "styled-components"
 
+
 export const HeaderContainer = styled.header`
     height: 150px;
     border-top: 3px solid ${({theme}) => theme.colors.green500};

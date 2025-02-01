@@ -4,27 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/api/actions/category.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types/productGroupByCategoryResponse-types.ts" afterDir="false" />
+    <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="SUP-245: implementa header da pagina">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/actions/products.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/actions/products.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/header/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/productListView/productListView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/productListView/productListView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/productSearch/productSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/productSearch/productSearch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/productsView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/productsView/productsView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/productsView/styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/context/SearchContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/SearchContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/category-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/category-types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/inputSearch/inputSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/inputSearch/inputSearch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/inputSearch/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/inputSearch/styles.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,11 +123,25 @@
       <workItem from="1738024688312" duration="2885000" />
       <workItem from="1738079202219" duration="1430000" />
       <workItem from="1738145647817" duration="890000" />
-      <workItem from="1738281026216" duration="3144000" />
+      <workItem from="1738281026216" duration="3402000" />
+      <workItem from="1738362906692" duration="174000" />
     </task>
+    <task id="LOCAL-00001" summary="SUP-245: implementa header da pagina">
+      <option name="closed" value="true" />
+      <created>1738284694833</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1738284694833</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="SUP-245: implementa header da pagina" />
+    <option name="LAST_COMMIT_MESSAGE" value="SUP-245: implementa header da pagina" />
   </component>
 </project>
