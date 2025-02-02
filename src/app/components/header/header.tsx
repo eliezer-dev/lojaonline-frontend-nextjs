@@ -9,7 +9,7 @@ import {
     LogoContainer
 } from "./styles";
 import InputSearch from "@/ui/inputSearch/inputSearch";
-import logoHeader from "@/assets/logo.png";
+import logoVeganNatu from "@/assets/logoVeganNatu.png";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import {GetProductByName} from "@/app/api/actions/products";
@@ -39,7 +39,7 @@ export default function Header () {
                 <div className={'content'}>
                     <div className={'header_logo_input'}>
                         <LogoContainer>
-                            <Image src={logoHeader} alt="logo" width={100} height={40}/>
+                            <Image src={logoVeganNatu} alt="logo" width={100} height={40}/>
                         </LogoContainer>
                         <InputSearch/>
                     </div>

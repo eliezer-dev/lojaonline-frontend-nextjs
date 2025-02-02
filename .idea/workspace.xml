@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="SUP-245: implementa header da pagina">
+    <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="feat: finaliza implementação do footer da pagina.">
+      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/baixar_app_store.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/disponivel_google_play.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/logoVeganNatu.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/footer/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/footer/footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/footer/styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/footer/styles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/logo.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +40,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2qjFdvvZdQTsDIzj5RoybiRYg91" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -125,6 +137,8 @@
       <workItem from="1738145647817" duration="890000" />
       <workItem from="1738281026216" duration="3402000" />
       <workItem from="1738362906692" duration="174000" />
+      <workItem from="1738364009185" duration="5931000" />
+      <workItem from="1738430988843" duration="8372000" />
     </task>
     <task id="LOCAL-00001" summary="SUP-245: implementa header da pagina">
       <option name="closed" value="true" />
@@ -134,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738284694833</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: implementa o footer da página, seção de contato, informações, dúvidas e formas de pagamento.">
+      <option name="closed" value="true" />
+      <created>1738371670529</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1738371670529</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +164,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="SUP-245: implementa header da pagina" />
-    <option name="LAST_COMMIT_MESSAGE" value="SUP-245: implementa header da pagina" />
+    <MESSAGE value="feat: implementa o footer da página, seção de contato, informações, dúvidas e formas de pagamento." />
+    <MESSAGE value="feat: finaliza implementação do footer da pagina." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: finaliza implementação do footer da pagina." />
   </component>
 </project>
