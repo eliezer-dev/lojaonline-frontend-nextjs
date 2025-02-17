@@ -28,7 +28,7 @@ export default async function Home() {
 	throw new Error('Erro ao buscar produtos')
   }
 
-
+    
 
   return (
         <HomeContainer>
