@@ -1,3 +1,4 @@
+import withAntdLess from 'next-plugin-antd-less';
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

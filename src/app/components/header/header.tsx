@@ -17,6 +17,29 @@ import {GetAllCategories} from "@/app/api/actions/category";
 import {CategoryResponse} from "@/types/category-types";
 import {AuditOutlined, HeartOutlined, HeartTwoTone, ShoppingCartOutlined} from "@ant-design/icons";
 import {UserOutlined} from "@ant-design/icons";
+import Link from "next/link";
+
+interface HeaderButtonProps {
+    href?: string; 
+    icon: React.ReactNode; 
+    title: string; 
+    subtitle?: string;
+}
+
+export const HeaderButton: React.FC<HeaderButtonProps> = ({ href, icon, title, subtitle }) => {
+    const ButtonContent = (
+        <HeaderButtonsContainer>
+            {icon}
+            <div className="content">
+                <p className={subtitle ? "" : "strong"}>{title}</p>
+                {subtitle && <p className="strong">{subtitle}</p>}
+            </div>
+        </HeaderButtonsContainer>
+    );
+    
+    return href ? <Link href={href}>{ButtonContent}</Link> : ButtonContent;
+};
+
 
 
 export default function Header () {
@@ -28,7 +51,6 @@ export default function Header () {
     
     const fetchCategories = async ()=> {
         const categories = await GetAllCategories();
-        console.log(categories)
         setCategoriesState(categories);
     }
     
@@ -38,34 +60,39 @@ export default function Header () {
             <HeaderSearchAndButtonsContainer>
                 <div className={'content'}>
                     <div className={'header_logo_input'}>
-                        <LogoContainer>
-                            <Image src={logoVeganNatu} alt="logo" width={100} height={40}/>
-                        </LogoContainer>
+                        <Link href='/'>
+                            <LogoContainer>
+                                <Image src={logoVeganNatu} alt="logo" width={100} height={40}/>
+                            </LogoContainer>
+                        </Link>
                         <InputSearch/>
+  
                     </div>
                     
                     <div className={'buttons'}>
-                        <HeaderButtonsContainer >
-                            <UserOutlined className={'header_buttons_icon'} />
-                            <div className={'content'}>
-                                <p>Bem vindo</p>
-                                <p className={'strong'}>Entre ou Cadastre-se</p>
-                            </div>
-                        </HeaderButtonsContainer>
+                        <HeaderButton 
+                            href='/login'
+                            icon={
+                                <UserOutlined className={'header_buttons_icon'} />
+                            }
+                            title="Bem vindo"
+                            subtitle="Entre ou Cadastre-se"
+                        
+                        />                            
 
-                        <HeaderButtonsContainer>
-                            <HeartOutlined className={'header_buttons_icon'}/>
-                            <div className={'content'}>
-                                <p className={'strong'}>Meus <br/> Favoritos</p>
-                            </div>
-                        </HeaderButtonsContainer>
+                        <HeaderButton
+                            href='/favorites'
+                            icon={<HeartOutlined className={'header_buttons_icon'}/>}
+                            title="Meus"
+                            subtitle="Favoritos"
+                        />
 
-                        <HeaderButtonsContainer>
-                            <ShoppingCartOutlined className={'header_buttons_icon'}/>
-                            <div className={'content'}>
-                                <p className={'strong'}>Meu <br/> Carrinho</p>
-                            </div>
-                        </HeaderButtonsContainer>      
+                        <HeaderButton
+                            href='/cart'
+                            icon={<ShoppingCartOutlined className={'header_buttons_icon'}/>}
+                            title="Meu"
+                            subtitle="Carrinho"
+                        />
                     </div>
                   
                     

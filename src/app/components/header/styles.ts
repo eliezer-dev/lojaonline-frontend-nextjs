@@ -7,6 +7,11 @@ export const HeaderContainer = styled.header`
     height: 150px;
     border-top: 3px solid ${({theme}) => theme.colors.green500};
     background-color: ${({theme}) => theme.colors.green500};
+    
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 `;
 
 export const HeaderSearchAndButtonsContainer = styled.div`
@@ -75,6 +80,9 @@ export const HeaderButtonsContainer = styled.div`
     gap: .5rem;
     align-items: center;
     
+    &:hover {
+        cursor: pointer;
+    }
     
     .content {
         display: flex;

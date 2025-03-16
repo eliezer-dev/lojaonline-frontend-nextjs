@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="feat: finaliza implementação do footer da pagina.">
-      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/baixar_app_store.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/disponivel_google_play.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/logoVeganNatu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/cadastro/client-component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/AuthContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/footer/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/footer/footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/footer/styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/footer/styles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/header/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +62,7 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.Next JS Run.executor&quot;: &quot;Run&quot;,
     &quot;npm.NextJS Debug.executor&quot;: &quot;Debug&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AIAssistantPromptsLibrary&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/home/eliezer/code/lojaonline-frontend-nextjs/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -106,8 +106,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.153" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.153" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
       </set>
     </attachedChunks>
   </component>
@@ -139,6 +139,20 @@
       <workItem from="1738362906692" duration="174000" />
       <workItem from="1738364009185" duration="5931000" />
       <workItem from="1738430988843" duration="8372000" />
+      <workItem from="1738511551282" duration="136000" />
+      <workItem from="1738715337673" duration="1340000" />
+      <workItem from="1739402402319" duration="4775000" />
+      <workItem from="1739462622505" duration="1171000" />
+      <workItem from="1739492426366" duration="967000" />
+      <workItem from="1739834257026" duration="26000" />
+      <workItem from="1739923989361" duration="4090000" />
+      <workItem from="1741134130300" duration="2561000" />
+      <workItem from="1741312033953" duration="80000" />
+      <workItem from="1741312147673" duration="5699000" />
+      <workItem from="1741795459796" duration="1252000" />
+      <workItem from="1741881957858" duration="1249000" />
+      <workItem from="1741916277179" duration="394000" />
+      <workItem from="1741916905988" duration="3061000" />
     </task>
     <task id="LOCAL-00001" summary="SUP-245: implementa header da pagina">
       <option name="closed" value="true" />
@@ -156,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738371670529</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: finaliza implementação do footer da pagina.">
+      <option name="closed" value="true" />
+      <created>1738511661099</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738511661099</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,5 +189,9 @@
     <MESSAGE value="feat: implementa o footer da página, seção de contato, informações, dúvidas e formas de pagamento." />
     <MESSAGE value="feat: finaliza implementação do footer da pagina." />
     <option name="LAST_COMMIT_MESSAGE" value="feat: finaliza implementação do footer da pagina." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
