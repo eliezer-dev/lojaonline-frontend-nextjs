@@ -7,6 +7,7 @@ import {theme} from "@/styles";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ConfigProvider } from 'antd';
 import ptBR from 'antd/locale/pt_BR';
+import PhoneInput from "antd-phone-input";
 
 function Providers(props: React.PropsWithChildren) {
     return (

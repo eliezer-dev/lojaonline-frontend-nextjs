@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="feat: finaliza implementação do footer da pagina.">
-      <change afterPath="$PROJECT_DIR$/src/app/cadastro/client-component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/context/AuthContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/client-types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/header/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/header/styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/cadastro/client-component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cadastro/client-component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/cadastro/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cadastro/styles.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +149,13 @@
       <workItem from="1741881957858" duration="1249000" />
       <workItem from="1741916277179" duration="394000" />
       <workItem from="1741916905988" duration="3061000" />
+      <workItem from="1742313308905" duration="2199000" />
+      <workItem from="1742349665364" duration="514000" />
+      <workItem from="1742399725885" duration="1563000" />
+      <workItem from="1742432173200" duration="3774000" />
+      <workItem from="1742486876858" duration="1134000" />
+      <workItem from="1742522251942" duration="792000" />
+      <workItem from="1742572256443" duration="1829000" />
     </task>
     <task id="LOCAL-00001" summary="SUP-245: implementa header da pagina">
       <option name="closed" value="true" />
