@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="feat: finaliza implementação do footer da pagina.">
-      <change afterPath="$PROJECT_DIR$/src/types/client-types.ts" afterDir="false" />
+    <list default="true" id="08e7e929-819e-4f50-ab89-7b4926ea93f6" name="Changes" comment="feat: implementa cadastro do cliente, ainda pendente validação dos campos.">
+      <change afterPath="$PROJECT_DIR$/src/app/api/actions/seachCep.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/common/constatnts/brazilian-states.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/cepInfo-types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/cadastro/client-component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cadastro/client-component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/cadastro/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cadastro/styles.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +33,9 @@
     &quot;accountId&quot;: &quot;512c86be-2430-4ef3-9c5b-3de07e71fcc8&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -49,8 +53,9 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/eliezer/code/lojaonline-frontend-nextjs&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/projetos/lojaonline-frontend-nextjs&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -59,7 +64,7 @@
     &quot;npm.Next JS Run.executor&quot;: &quot;Run&quot;,
     &quot;npm.NextJS Debug.executor&quot;: &quot;Debug&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AIAssistantPromptsLibrary&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/eliezer/code/lojaonline-frontend-nextjs/node_modules/typescript/lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\projetos\\lojaonline-frontend-nextjs\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -102,8 +107,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -156,6 +161,13 @@
       <workItem from="1742486876858" duration="1134000" />
       <workItem from="1742522251942" duration="792000" />
       <workItem from="1742572256443" duration="1829000" />
+      <workItem from="1742676618031" duration="99000" />
+      <workItem from="1742727867031" duration="3900000" />
+      <workItem from="1742746550403" duration="8858000" />
+      <workItem from="1742759645304" duration="309000" />
+      <workItem from="1742761296724" duration="341000" />
+      <workItem from="1742762198399" duration="38000" />
+      <workItem from="1742763967456" duration="466000" />
     </task>
     <task id="LOCAL-00001" summary="SUP-245: implementa header da pagina">
       <option name="closed" value="true" />
@@ -181,7 +193,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738511661099</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: implementa cadastro do cliente, ainda pendente validação dos campos.">
+      <option name="closed" value="true" />
+      <created>1742676709001</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742676709001</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,7 +211,8 @@
     <MESSAGE value="SUP-245: implementa header da pagina" />
     <MESSAGE value="feat: implementa o footer da página, seção de contato, informações, dúvidas e formas de pagamento." />
     <MESSAGE value="feat: finaliza implementação do footer da pagina." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: finaliza implementação do footer da pagina." />
+    <MESSAGE value="feat: implementa cadastro do cliente, ainda pendente validação dos campos." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: implementa cadastro do cliente, ainda pendente validação dos campos." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

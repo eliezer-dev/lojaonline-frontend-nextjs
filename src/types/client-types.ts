@@ -1,3 +1,4 @@
+import { UserToken } from "./userToken-types";
 
 export interface ClientRequest{
     fullname: string;
@@ -35,5 +36,6 @@ export interface ClientResponse {
     gender: string;
     birthdate: string;
     phone: ClientPhone[];
+    clientToken:UserToken
     address: ClientAddress;
 }

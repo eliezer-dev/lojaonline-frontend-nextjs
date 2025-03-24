@@ -10,8 +10,10 @@ import {useState} from "react";
 import {ProductResponse} from "@/types/product-types";
 import PhoneInput from "antd-phone-input";
 import {RuleObject, StoreValue} from "rc-field-form/es/interface";
-// import ptBR from 'antd/es/locale/pt_BR'; // Ant Design em português
-// import 'moment/locale/pt-br'; // Moment.js em português
+import {BRAZILIAN_STATES} from "@/shared/common/constatnts/brazilian-states";
+import {GetProductByName} from "@/app/api/actions/products";
+import {SearchCep} from "@/app/api/actions/seachCep";
+import { useAuth } from "@/context/AuthContext";
 
 export interface PhoneProps {
     phoneWithAreaCode: string;
@@ -23,25 +25,36 @@ export default function SignUpClientComponent () {
     const [form] = Form.useForm();
     const [phoneWithAreaCodeState, setPhoneWithAreaCodeState] = useState<string>('')
     const [cpfFieldState, setCpfState] = useState<string>('')
+    const [typingTimeout, setTypingTimeout] = useState<number>(0)
     
+    const { login } = useAuth();
 
+
+    const validateMessages = {
+        required: '${label} is required!',
+        types: {
+            email: 'Esse e-mail é inválido.',
+        },
+    };
 
     const onFinish: FormProps<ClientRequest>['onFinish'] = async (request) => {
-
-
 
         if (request.birthDate) {
             request.birthDate = format(new Date(request.birthDate), 'yyyy-MM-dd')
         }
-        
-        request.phone = [{
-                countryCode: '55',
-                areaCode: phoneWithAreaCodeState.substring(0, 2),
-                number: phoneWithAreaCodeState.substring(2, phoneWithAreaCodeState.length)
+       
+        if ('phoneWithAreaCode' in request) {
+            request.phone = [{
+                countryCode: '+55',
+                areaCode: (request as any).phoneWithAreaCode.areaCode,
+                number: (request as any).phoneWithAreaCode.phoneNumber
             }]
+            
+            delete (request as any).phoneWithAreaCode;
+        }
         
         const response = await CreateClient(request);
-        console.log(response);
+
     };
 
     const onFinishFailed: FormProps<ClientRequest>['onFinishFailed'] = (errorInfo) => {
@@ -60,26 +73,67 @@ export default function SignUpClientComponent () {
         setPhoneWithAreaCodeState(event.target.value); 
     };
 
-    // const phoneValidator = (_: RuleObject, value: StoreValue) => {
-    //     // Remove quaisquer espaços ou caracteres especiais da entrada
-    //
-    //     // Verifica se a entrada está vazia
-    //     if (!cleanedValue) {
-    //         return Promise.reject("Por favor, insira o número de celular");
-    //     }
-    //
-    //     // Regex ajustada para validar DDD (2 dígitos) + Número (8-9 dígitos)
-    //     const phoneRegex = /^\d{2}\d{8,9}$/;
-    //
-    //     if (!phoneRegex.test(cleanedValue)) {
-    //         return Promise.reject("O número de celular é inválido. Certifique-se de incluir o DDD e o número.");
-    //     }
-    //
-    //     return Promise.resolve();
-    //
-    // };
+    const handleChangeCep = (event: React.ChangeEvent<HTMLInputElement>) => {
+        let valor = event.target.value.replace(/\D/g, ''); 
+
+        if (valor.length > 8) {
+            valor = valor.substring(0, 8); // Limita o CEP a no máximo 8 dígitos
+        }
+
+        if (typingTimeout) {
+            clearTimeout(typingTimeout); 
+        }
+
+        setTypingTimeout(
+            window.setTimeout(() => { 
+                if (valor.length === 8) {
+                    const cepFormatado = valor.replace(/^(\d{5})(\d{3})$/, "$1-$2"); 
+                    form.setFieldValue(["address", "zipCode"], cepFormatado); 
+                    fetchCep(valor); 
+                }
+            }, 500) // Debounce: 500ms
+        );
 
 
+    };
+
+    
+    const phoneValidator = (_: any, value: any) => {
+        
+        let cleanedValue:string = ''
+        
+        //se pelo area code ou o numero do telefone estiver preenchido
+        if (value && (value.areaCode || value.phoneNumber)) {
+            cleanedValue = `${value.areaCode}${value.phoneNumber}`;
+
+            // Regex para validar formato: DDD (2 dígitos) + Número (9 dígitos)
+            const phoneRegex = /^\d{11}$/;
+
+            if (!phoneRegex.test(cleanedValue)) {
+                return Promise.reject("Por favor, insira o número de celular válido.");
+            }
+
+            return Promise.resolve();
+
+       }
+
+       return Promise.reject();
+    
+ 
+
+    };
+
+
+    const fetchCep = async (cep:string) => {
+        const response = await SearchCep(cep);
+        form.setFieldValue(['address', 'street'], response.logradouro);
+        form.setFieldValue(['address', 'number'], response.complemento);
+        form.setFieldValue(['address', 'city'], response.localidade);
+        form.setFieldValue(['address', 'neighborhood'], response.bairro);
+        form.setFieldValue(['address', 'state'], response.uf);
+        console.log(response);
+
+    };
 
 
 
@@ -97,6 +151,7 @@ export default function SignUpClientComponent () {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
                 form={form}
+                validateMessages={validateMessages}
             >
                 <Form.Item<ClientRequest>
                     label="Nome Completo"
@@ -116,7 +171,7 @@ export default function SignUpClientComponent () {
                         },
                         {
                             pattern: /^[0-9]{11}$/,
-                            message: 'O CPF deve conter exatamente 11 dígitos numéricos'
+                            message: 'O CPF deve conter 11 dígitos numéricos'
                         }
                     ]}
                 >
@@ -156,14 +211,14 @@ export default function SignUpClientComponent () {
 
                 <Form.Item<PhoneProps>
                     label="Celular: "
+                    name="phoneWithAreaCode"
                     rules={[
-                        { required: true, message: 'Por favor, digite o seu número de celular.' },
-                        // {validator: phoneValidator}                   
+                        { required: true, message: 'Por favor, informe o número do celular.' },
+                        { validator: phoneValidator}                   
                     
                     ]}
                 >
                     <PhoneInput
-                        value={phoneWithAreaCodeState}
                         disableDropdown
                     />
                 </Form.Item>
@@ -171,9 +226,21 @@ export default function SignUpClientComponent () {
                 <Form.Item<ClientRequest>
                     label="Cep: "
                     name={['address', 'zipCode']}
-                    rules={[{ required: true, message: 'Por favor, digite o seu cep' }]}
+                    rules={[
+                        { required: true, message: 'Por favor, digite o seu cep' },
+                        {
+                            pattern: /^\d{5}-\d{3}$/,
+                            message: 'O CEP deve estar no formato XXXXX-XXX'
+                        }
+                    
+                    ]}
                 >
-                    <Input />
+                    <Input
+                        maxLength={9}
+                        onChange={handleChangeCep}
+                    
+                    />
+
                 </Form.Item>
 
                 <Form.Item<ClientRequest>
@@ -217,7 +284,10 @@ export default function SignUpClientComponent () {
                     name={['address', 'state']}
                     rules={[{ required: true, message: 'Por favor, selecione o estado' }]}
                 >
-                    <Input />
+                    <Select
+                        style={{ width: 120 }}
+                        options={BRAZILIAN_STATES}
+                    />
                 </Form.Item>
 
                 <Form.Item<ClientRequest>
@@ -232,7 +302,7 @@ export default function SignUpClientComponent () {
                 <Form.Item<ClientRequest>
                     label="E-mail"
                     name="email"
-                    rules={[{ required: true, message: 'Por favor, digite o seu e-mail' }]}
+                    rules={[{ required: true, message: 'Por favor, digite o seu e-mail' }, { type: 'email' }]}
                 >
                     <Input />
                 </Form.Item>
