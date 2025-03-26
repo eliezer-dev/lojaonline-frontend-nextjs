@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DataProvider } from "@/context/DataContext";
+import { AuthProvider } from "@/context/AuthContext";
 import Providers from "@/providers";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import  '@ant-design/v5-patch-for-react-19';
@@ -31,15 +32,17 @@ export default function RootLayout({
           />
       </head>
       <body>
-      <DataProvider>
-        <Providers>
-            <SearchProvider>
-                <Header/>
-                {children}
-                <Footer/>
-            </SearchProvider>
-        </Providers>
-      </DataProvider>
+        <Providers>  
+          <AuthProvider>
+            <DataProvider>
+                <SearchProvider>
+                    <Header/>
+                    {children}
+                    <Footer/>
+                </SearchProvider>
+            </DataProvider>
+          </AuthProvider>
+        </Providers> 
       </body>
     </html>
   );

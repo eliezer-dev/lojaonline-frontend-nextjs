@@ -1,11 +1,14 @@
+'use client'
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import { UserToken } from '@/types/userToken-types';
 
 interface AuthContextData {
-    user: any; // Substitua com o tipo real, por exemplo, User ou null
+    userToken: UserToken | null; 
     isAuthenticated: boolean;
-    login: (userData: any) => void; // Função para fazer login
-    logout: () => void; // Função para fazer logoff
+    login: (userData: any) => void; 
+    logout: () => void; 
 }
 
 // Cria o contexto
@@ -13,34 +16,35 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 // Provedor de autenticação
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<any>(null); // Estado do usuário
+    const [user, setUser] = useState<any>(null); 
+    const [userToken, setUserToken] = useState<UserToken | null>(null); // Estado do token do usuário
     const router = useRouter();
 
-    // Carregar dados do usuário ao iniciar o app (se um token de sessão for encontrado)
+    
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
+        const storedUser = localStorage.getItem('userToken');
         const parsedUser = storedUser ? JSON.parse(storedUser) : null;
         if (parsedUser) {
-            setUser(parsedUser);
+            setUserToken(parsedUser);
         }
     }, []);
 
-    const login = (userData: any) => {
-        setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData)); // Salvar no localStorage (ou cookies)
+    const login = (userToken: UserToken) => {
+        setUserToken(userToken);
+        localStorage.setItem('vn_token', JSON.stringify(userToken));
     };
 
     const logout = () => {
-        setUser(null);
-        localStorage.removeItem('user');
-        router.push('/login'); // Redireciona para a página de login
+        setUserToken(null);
+        localStorage.removeItem('userToken');
+        router.push('/');
     };
 
     return (
         <AuthContext.Provider
             value={{
-                user,
-                isAuthenticated: !!user, // verifica se o usuário está autenticado
+                userToken,
+                isAuthenticated: !!userToken, 
                 login,
                 logout,
             }}
@@ -50,5 +54,4 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
 };
 
-// Hook para usar o contexto
 export const useAuth = () => useContext(AuthContext);
