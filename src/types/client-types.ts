@@ -1,4 +1,4 @@
-import { UserToken } from "./userToken-types";
+import { UserToken } from "./userAuthResponse-types";
 
 export interface ClientRequest{
     fullname: string;

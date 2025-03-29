@@ -5,7 +5,7 @@ import {OrderRequest, OrderResponse} from "@/types/order-types";
 
 export const CreateOrder = async (orderRequest: OrderRequest) => {
     try {
-        const response = await api.post<OrderResponse>(`/orders?user`, orderRequest);
+        const response = await api.post<OrderResponse>(`/orders`, orderRequest);
         return response.data;
     } catch (error) {
         // Captura o erro e processa ele, se necessário

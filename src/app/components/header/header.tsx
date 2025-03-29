@@ -18,6 +18,7 @@ import {CategoryResponse} from "@/types/category-types";
 import {AuditOutlined, HeartOutlined, HeartTwoTone, ShoppingCartOutlined} from "@ant-design/icons";
 import {UserOutlined} from "@ant-design/icons";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 interface HeaderButtonProps {
     href?: string; 
@@ -44,6 +45,7 @@ export const HeaderButton: React.FC<HeaderButtonProps> = ({ href, icon, title, s
 
 export default function Header () {
     const [categoriesState, setCategoriesState] = useState<CategoryResponse[]>([]);
+    const { login, isAuthenticated, user } = useAuth();
     
     useEffect(() => {
         fetchCategories ()
@@ -76,7 +78,7 @@ export default function Header () {
                                 <UserOutlined className={'header_buttons_icon'} />
                             }
                             title="Bem vindo"
-                            subtitle="Entre ou Cadastre-se"
+                            subtitle={isAuthenticated ? user?.fullname.split(" ")[0] : "Entre ou Cadastre-se"}
                         
                         />                            
 

@@ -17,6 +17,7 @@
         "antd-phone-input": "^0.3.13",
         "axios": "^1.7.9",
         "date-fns": "^4.1.0",
+        "jwt-decode": "^4.0.0",
         "my-app": "file:",
         "next": "15.1.4",
         "next-plugin-antd-less": "^1.8.0",

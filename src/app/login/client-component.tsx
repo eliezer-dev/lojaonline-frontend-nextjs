@@ -25,9 +25,9 @@ export default function SignInClientComponent () {
         const response = await AuthenticateUser(request);
         if (response) {
             login(response);
+            router.push('/');
         }
-
-        router.push('/');
+       
     };
 
  

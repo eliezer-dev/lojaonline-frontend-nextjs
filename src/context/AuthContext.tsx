@@ -2,13 +2,19 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { UserToken } from '@/types/userToken-types';
+import { UserAuthResponse, UserToken } from '@/types/userAuthResponse-types';
+import { GetClientById } from '@/app/api/actions/client';
 
 interface AuthContextData {
     userToken: UserToken | null; 
     isAuthenticated: boolean;
     login: (userData: any) => void; 
     logout: () => void; 
+    user: UserStore | null;
+}
+
+interface UserStore {
+    fullname: string
 }
 
 // Cria o contexto
@@ -16,8 +22,8 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 // Provedor de autenticação
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<any>(null); 
-    const [userToken, setUserToken] = useState<UserToken | null>(null); // Estado do token do usuário
+    const [user, setUser] = useState<UserStore | null>(null); 
+    const [userToken, setUserToken] = useState<UserToken | null>(null);
     const router = useRouter();
 
     
@@ -29,9 +35,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     }, []);
 
-    const login = (userToken: UserToken) => {
-        setUserToken(userToken);
+    const login = (userAuthData: UserAuthResponse) => {
+        setUserToken(userAuthData.userToken);
         localStorage.setItem('vn_token', JSON.stringify(userToken));
+        const client = fetchClient(userAuthData.userData.userId);
     };
 
     const logout = () => {
@@ -40,13 +47,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         router.push('/');
     };
 
+    const fetchClient = async (clientId:number) => {
+        const client = await GetClientById(clientId);
+        console.log(client);
+        setUser({
+            fullname: client.fullname
+        });
+    }
+
     return (
         <AuthContext.Provider
             value={{
                 userToken,
-                isAuthenticated: !!userToken, 
+                isAuthenticated: !!userToken && !!user, 
                 login,
                 logout,
+                user
             }}
         >
             {children}
