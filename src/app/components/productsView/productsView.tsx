@@ -12,12 +12,12 @@ import {GetProductByName} from "@/app/api/actions/products";
 import {CreateOrder} from "@/app/api/actions/order";
 import {OrderRequest, OrderRequestInstallment, OrderRequestItem} from "@/types/order-types";
 import { useRouter } from "next/navigation";
+import { useData } from "@/context/DataContext";
 
 export default function ProductView({product}:{product: ProductResponse}) {
     const [productState, setProductState] = useState<ProductResponse>()
+     const {isCartActive, handleCartDetails, addProductToCart} = useData();
     const router = useRouter();
-
-//   const { addProductToCart, handleCartDetails } = useData();
 
   useEffect(() => {
 
@@ -27,30 +27,16 @@ export default function ProductView({product}:{product: ProductResponse}) {
 
 }, [product]);
 
-    const handleCreateOrder = async () => {
+   
+
+    function handleAddProductToCart () {
         if (productState != null) {
-            let orderRequest = {} as OrderRequest;
-            orderRequest.userId = 1
-            orderRequest.totalValue = productState.price
-            orderRequest.orderItems = [
-                {
-                    productId: productState.id,
-                    quantity: 1,
-                    price: productState.price
-                }
-            ]
-            orderRequest.orderInstallments = [{
-                paymentMethod:1,
-                installment: 1,
-                numberOfInstallments:1,
-                installmentValue: productState.price
-            }]
-            
-            const response = await CreateOrder(orderRequest);
-            router.push(response.pagarMe.url);
+            addProductToCart(productState)
+            handleCartDetails(true)
         }
 
-    };
+       
+    }
 
   return (
   <>
@@ -69,7 +55,7 @@ export default function ProductView({product}:{product: ProductResponse}) {
           <p className="product_description">{productState?.name}</p>
         </div>
         <p className="product_price">{productState && formatToBRL(productState.price)}</p>
-        <Button title={'Adicionar'} icon={CiShoppingCart} onClick={handleCreateOrder}/>
+        <Button title={'Adicionar'} icon={CiShoppingCart} onClick={handleAddProductToCart}/>
 
       </ProductViewContainer>
     }

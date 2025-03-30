@@ -4,6 +4,11 @@ import styled from "styled-components"
 
 
 export const HeaderContainer = styled.header`
+    position: fixed; /* Torna o header fixo no topo */
+    top: 0; /* Fixa no topo da página */
+    left: 0; /* Fixa no lado esquerdo */
+    width: 100%; /* Faz o header ocupar toda a largura da página */
+    z-index: 1000;
     height: 150px;
     border-top: 3px solid ${({theme}) => theme.colors.green500};
     background-color: ${({theme}) => theme.colors.green500};

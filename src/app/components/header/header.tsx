@@ -19,17 +19,19 @@ import {AuditOutlined, HeartOutlined, HeartTwoTone, ShoppingCartOutlined} from "
 import {UserOutlined} from "@ant-design/icons";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useData } from "@/context/DataContext";
 
 interface HeaderButtonProps {
     href?: string; 
     icon: React.ReactNode; 
     title: string; 
     subtitle?: string;
+    onClick?: () => void;
 }
 
-export const HeaderButton: React.FC<HeaderButtonProps> = ({ href, icon, title, subtitle }) => {
+export const HeaderButton: React.FC<HeaderButtonProps> = ({ href, icon, title, subtitle, onClick }) => {
     const ButtonContent = (
-        <HeaderButtonsContainer>
+        <HeaderButtonsContainer onClick={onClick}>
             {icon}
             <div className="content">
                 <p className={subtitle ? "" : "strong"}>{title}</p>
@@ -44,6 +46,7 @@ export const HeaderButton: React.FC<HeaderButtonProps> = ({ href, icon, title, s
 
 
 export default function Header () {
+    const {isCartActive, handleCartDetails} = useData();
     const [categoriesState, setCategoriesState] = useState<CategoryResponse[]>([]);
     const { login, isAuthenticated, user } = useAuth();
     
@@ -55,6 +58,11 @@ export default function Header () {
         const categories = await GetAllCategories();
         setCategoriesState(categories);
     }
+
+    function handleEnabledCartDetails () {
+        handleCartDetails(true)
+    }
+
     
     return (
         <HeaderContainer>
@@ -90,10 +98,10 @@ export default function Header () {
                         />
 
                         <HeaderButton
-                            href='/cart'
                             icon={<ShoppingCartOutlined className={'header_buttons_icon'}/>}
                             title="Meu"
                             subtitle="Carrinho"
+                            onClick={handleEnabledCartDetails}
                         />
                     </div>
                   

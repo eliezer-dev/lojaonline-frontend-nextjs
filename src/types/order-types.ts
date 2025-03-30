@@ -48,6 +48,7 @@ export interface OrderRequest {
 
 export interface OrderRequestItem {
     productId: number;
+    name: string;
     quantity: number;
     price: number;
 }

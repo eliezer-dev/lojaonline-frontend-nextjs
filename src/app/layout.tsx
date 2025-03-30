@@ -7,6 +7,9 @@ import  '@ant-design/v5-patch-for-react-19';
 import Header from "@/app/components/header/header";
 import {SearchProvider} from "@/context/SearchContext";
 import Footer from "@/app/components/footer/footer";
+import CartDetails from "./components/cartDetails/cartDetails";
+import { useEffect, useState } from "react";
+import RootComponent from "./client-component";
 
 export const metadata: Metadata = {
   title: "Vegan Natu",
@@ -21,6 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <head>
@@ -32,13 +36,17 @@ export default function RootLayout({
           />
       </head>
       <body>
+
         <Providers>  
           <AuthProvider>
             <DataProvider>
                 <SearchProvider>
-                    <Header/>
-                    {children}
-                    <Footer/>
+                    <RootComponent>
+                        <CartDetails/>
+                        <Header/>
+                        {children}
+                        <Footer/>
+                    </RootComponent>
                 </SearchProvider>
             </DataProvider>
           </AuthProvider>

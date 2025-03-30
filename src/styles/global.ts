@@ -3,6 +3,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+
   * {
     margin: 0;
     padding: 0;
@@ -10,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    overflow-x: auto;
+    overflow-x: hidden;
     min-height: 100vh;  
     background-color: ${({theme}) => theme.colors.green100 };
     color: ${({theme}) => theme.colors.gray500};
@@ -27,4 +28,21 @@ export const GlobalStyles = createGlobalStyle`
   main {
     display: block;
   }
+
+  /* Bloqueia a rolagem */
+ .no-scroll {
+  overflow: hidden;
+}
+
+/* Fundo com opacidade */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); 
+  z-index: 1100; 
+  pointer-events: none; 
+}
 `;
