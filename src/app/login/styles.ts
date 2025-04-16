@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { Button} from "antd";
 
 export const LoginContainer = styled.div`
+    margin-top:  150px;
     height: 550px;
     width: 100%;
     display: flex;
