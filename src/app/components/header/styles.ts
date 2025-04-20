@@ -36,15 +36,37 @@ export const HeaderSearchAndButtonsContainer = styled.div`
         gap: 1rem;
     }
     
-    .buttons {
-        display: flex;
-        gap: 1rem;
-    }
     
     .header_logo_input {
         display: flex;
         gap: 1rem;
     }
+
+
+
+`
+
+export const HeaderButtonsMainContainer = styled.div `
+    display: flex;
+    gap: 1rem;
+
+    .user_profile_menu {
+     font-weight: bold;
+     color: ${({theme}) => theme.colors.green500};
+    
+    
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+   }
+
+   .loginButton {
+     display: flex;
+     flex-direction: column;
+     gap: .5rem;
+   }
+
 `
 
 export const LogoContainer = styled.div`
@@ -80,7 +102,8 @@ export const HeaderCategoryItemContainer = styled.span `
  
 `
 
-export const HeaderButtonsContainer = styled.div`
+export const HeaderButtonItemContainer = styled.div`
+    
     display: flex;
     gap: .5rem;
     align-items: center;
@@ -89,7 +112,7 @@ export const HeaderButtonsContainer = styled.div`
         cursor: pointer;
     }
     
-    .content {
+    .headerButtons_content {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -111,7 +134,12 @@ export const HeaderButtonsContainer = styled.div`
             color: ${({theme}) => theme.colors.green500};
         }
     }
-   .strong {
+   
+    .strong {
        font-weight: bold;
-   }
+    }
+
+  
+
+   
 `

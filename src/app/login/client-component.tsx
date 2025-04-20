@@ -6,6 +6,7 @@ import { LoginContainer, LoginContent } from "./styles";
 import { AuthenticateUser } from "../api/actions/auth";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";	
+import { useState } from "react";
 
 export interface AuthRequest {
     email: string;
@@ -14,6 +15,8 @@ export interface AuthRequest {
 
 
 export default function SignInClientComponent () {
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
+    const [loginFailed, setLoginFailed] = useState(false);
 
     const [form] = Form.useForm();
 
@@ -22,10 +25,18 @@ export default function SignInClientComponent () {
     const router = useRouter();
 
    const onFinish: FormProps<AuthRequest>['onFinish'] = async (request) => {
-        const response = await AuthenticateUser(request);
-        if (response) {
-            login(response);
-            router.push('/');
+        setIsLoggingIn(true)
+        
+        try {
+            const response = await AuthenticateUser(request);
+            if (response) {
+                login(response);
+                router.push('/');
+            }
+        } catch (error) {
+            setIsLoggingIn(false);
+            setLoginFailed(true);
+            console.error('Erro ao fazer login:', error);
         }
        
     };
@@ -37,7 +48,7 @@ export default function SignInClientComponent () {
     };
 
     const validateMessages = {
-        required: '${label} is required!',
+        required: '${label} é obrigatório.',
         types: {
             email: 'Esse e-mail é inválido.',
         },
@@ -50,8 +61,6 @@ export default function SignInClientComponent () {
                     <h1>Entre ou Cadastre-se</h1>
                     <Form
                         name="basic"
-                        //labelCol={{ span: 8 }}
-                        // wrapperCol={{ span: 16 }}
                         style={{ maxWidth: 600 }}
                         initialValues={{ remember: true, gender: 'male'
                         }}
@@ -79,12 +88,12 @@ export default function SignInClientComponent () {
                         </Form.Item>
 
                         <Form.Item 
-                        //wrapperCol={{ offset: 8, span: 16 }}
                         >
                             <Button className="login_button" block htmlType="submit">
-                                Entrar
+                                {isLoggingIn ? 'Entrando...': 'Entrar'}
                             </Button>
                             Não tem cadastro? <Link href="/cadastro">Cadastre-se agora!</Link>
+                            {loginFailed && <p style={{color: 'red'}}>E-mail ou senha inválidos.</p>}
                         </Form.Item>
 
                     </Form>

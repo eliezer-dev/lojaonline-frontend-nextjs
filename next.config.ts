@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
             hostname: "api.lojaonline.eliezer.tec.br",
             pathname: "/**",
         },
+        {
+            protocol: "http",
+            hostname: "localhost",
+            pathname: "/**",
+        },
     ],
 },
 };

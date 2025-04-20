@@ -2,11 +2,12 @@
 
 import {
     HeaderCategoriesContainer,
-    HeaderButtonsContainer,
+    HeaderButtonItemContainer,
     HeaderCategoryItemContainer,
     HeaderContainer,
     HeaderSearchAndButtonsContainer,
-    LogoContainer
+    LogoContainer,
+    HeaderButtonsMainContainer
 } from "./styles";
 import InputSearch from "@/ui/inputSearch/inputSearch";
 import logoVeganNatu from "@/assets/logoVeganNatu.png";
@@ -20,6 +21,7 @@ import {UserOutlined} from "@ant-design/icons";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useData } from "@/context/DataContext";
+import { useTheme } from 'styled-components';
 
 interface HeaderButtonProps {
     href?: string; 
@@ -30,17 +32,19 @@ interface HeaderButtonProps {
 }
 
 export const HeaderButton: React.FC<HeaderButtonProps> = ({ href, icon, title, subtitle, onClick }) => {
+    const { login, isAuthenticated, user } = useAuth();
+    
     const ButtonContent = (
-        <HeaderButtonsContainer onClick={onClick}>
+        <HeaderButtonItemContainer onClick={onClick}>
             {icon}
-            <div className="content">
+            <div className="headerButtons_content">
                 <p className={subtitle ? "" : "strong"}>{title}</p>
                 {subtitle && <p className="strong">{subtitle}</p>}
             </div>
-        </HeaderButtonsContainer>
+        </HeaderButtonItemContainer>
     );
     
-    return href ? <Link href={href}>{ButtonContent}</Link> : ButtonContent;
+    return href && !isAuthenticated  ? <Link href={href}>{ButtonContent}</Link> : ButtonContent;
 };
 
 
@@ -48,7 +52,8 @@ export const HeaderButton: React.FC<HeaderButtonProps> = ({ href, icon, title, s
 export default function Header () {
     const {isCartActive, handleCartDetails} = useData();
     const [categoriesState, setCategoriesState] = useState<CategoryResponse[]>([]);
-    const { login, isAuthenticated, user } = useAuth();
+    const { login, isAuthenticated, user, logout } = useAuth();
+    const [showUserProfileMenuState, setShowUserProfileState] = useState(false);
     
     useEffect(() => {
         fetchCategories ()
@@ -63,7 +68,14 @@ export default function Header () {
         handleCartDetails(true)
     }
 
-    
+    function handleUserProfile () {
+        
+        if (isAuthenticated) {
+            setShowUserProfileState(!showUserProfileMenuState)
+        }
+      
+    }
+
     return (
         <HeaderContainer>
             
@@ -79,7 +91,8 @@ export default function Header () {
   
                     </div>
                     
-                    <div className={'buttons'}>
+                    <HeaderButtonsMainContainer>
+                        <div className="loginButton">
                         <HeaderButton 
                             href='/login'
                             icon={
@@ -87,8 +100,21 @@ export default function Header () {
                             }
                             title="Bem vindo"
                             subtitle={isAuthenticated ? user?.fullname.split(" ")[0] : "Entre ou Cadastre-se"}
+                            onClick={handleUserProfile}                        
                         
-                        />                            
+                        />
+                        {
+                            showUserProfileMenuState && isAuthenticated &&
+                            <p className="user_profile_menu"
+                                onClick={() => logout()} 
+
+                            >
+                                    Sair
+                            </p>
+
+                        }   
+                        </div>
+                                               
 
                         <HeaderButton
                             href='/favorites'
@@ -103,7 +129,7 @@ export default function Header () {
                             subtitle="Carrinho"
                             onClick={handleEnabledCartDetails}
                         />
-                    </div>
+                    </HeaderButtonsMainContainer>
                   
                     
                 </div>

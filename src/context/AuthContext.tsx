@@ -28,28 +28,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     
     useEffect(() => {
-        const storedUser = localStorage.getItem('userToken');
-        const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-        if (parsedUser) {
-            setUserToken(parsedUser);
-        }
+        getUserTokenFromLocalStorage();
     }, []);
 
     const login = (userAuthData: UserAuthResponse) => {
         setUserToken(userAuthData.userToken);
-        localStorage.setItem('vn_token', JSON.stringify(userToken));
-        const client = fetchClient(userAuthData.userData.userId);
+        localStorage.setItem('vn_userData', JSON.stringify(userAuthData));
+        fetchClient(userAuthData.userData.userId);
     };
+
+    const getUserTokenFromLocalStorage = () => {
+        const storedUser = localStorage.getItem('vn_userData');
+        const parsedUser:UserAuthResponse|null = storedUser ? JSON.parse(storedUser) : null;
+        if (parsedUser) {
+            setUserToken(parsedUser.userToken);
+            fetchClient(parsedUser.userData.userId);
+        }
+    }
 
     const logout = () => {
         setUserToken(null);
-        localStorage.removeItem('userToken');
+        localStorage.removeItem('vn_userData');
         router.push('/');
     };
 
     const fetchClient = async (clientId:number) => {
         const client = await GetClientById(clientId);
-        console.log(client);
         setUser({
             fullname: client.fullname
         });

@@ -12,7 +12,9 @@ interface DecodedToken {
 
 
 export const AuthenticateUser = async (credentials: { email: string; password: string }): Promise<UserAuthResponse> => {
+    
     const response = await api.post<UserToken>('/clients/auth', credentials);
+    
     const token = response.data.access_token
 
     const decoded: DecodedToken = jwtDecode(token);
