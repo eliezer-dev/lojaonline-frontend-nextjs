@@ -6,11 +6,12 @@ import { LoginContainer, LoginContent } from "./styles";
 import { AuthenticateUser } from "../api/actions/auth";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";	
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface AuthRequest {
     email: string;
     password: string;
+    
 }
 
 
@@ -20,7 +21,7 @@ export default function SignInClientComponent () {
 
     const [form] = Form.useForm();
 
-    const { login } = useAuth();
+    const { login, isAuthenticated } = useAuth();
 
     const router = useRouter();
 
@@ -55,10 +56,16 @@ export default function SignInClientComponent () {
     };
 
 
+    useEffect(() => {
+        if (isAuthenticated) {
+            router.push('/');
+        }
+    }, );
+
     return (
         <LoginContainer>
            <LoginContent>
-                    <h1>Entre ou Cadastre-se</h1>
+                    <h1>{isAuthenticated && !isLoggingIn ? 'Você já está logado.' : 'Entre ou Cadastre-se'}</h1>
                     <Form
                         name="basic"
                         style={{ maxWidth: 600 }}
@@ -74,9 +81,10 @@ export default function SignInClientComponent () {
                         <Form.Item<AuthRequest>
                             label="E-mail"
                             name="email"
+                            
                             rules={[{ required: true, message: 'Por favor, digite o seu e-mail.' }, { type: 'email' }]}
                         >
-                            <Input />
+                            <Input disabled={isAuthenticated} />
                         </Form.Item>
 
                         <Form.Item<AuthRequest>
@@ -84,19 +92,24 @@ export default function SignInClientComponent () {
                             name="password"
                             rules={[{ required: true, message: 'Por favor, digite a sua senha.' }]}
                         >
-                            <Input.Password />
+                            <Input.Password disabled={isAuthenticated}/>
                         </Form.Item>
 
                         <Form.Item 
                         >
-                            <Button className="login_button" block htmlType="submit">
-                                {isLoggingIn ? 'Entrando...': 'Entrar'}
+                            <Button 
+                                className="login_button" 
+                                block htmlType="submit"
+                                disabled={isAuthenticated || isLoggingIn}
+                                >
+                                {isLoggingIn || isAuthenticated ? 'Entrando...': 'Entrar'}
                             </Button>
                             Não tem cadastro? <Link href="/cadastro">Cadastre-se agora!</Link>
                             {loginFailed && <p style={{color: 'red'}}>E-mail ou senha inválidos.</p>}
                         </Form.Item>
 
                     </Form>
+                   
         
             </LoginContent>
         </LoginContainer>
