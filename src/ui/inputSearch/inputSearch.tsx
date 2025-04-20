@@ -7,8 +7,7 @@ import {SearchOutlined} from "@ant-design/icons";
 
 
 export  default function InputSearch () {
-    // const { icon: Icon, title, onClick, disabled } = props;
-    const {Search} = Input
+
     const { searchQuery, handleSearchContext } = useSearchContext();
 
 
@@ -21,20 +20,10 @@ export  default function InputSearch () {
                 addonAfter='Buscar'
                 variant="borderless"
                 className="header_input_search"
+                onChange={(e) => handleSearchContext(e.target.value)}
+                value={searchQuery.query}
 
             />
-        {/*<AutoComplete*/}
-        {/*// popupClassName="certain-category-search-dropdown"*/}
-        {/*// popupMatchSelectWidth={500}*/}
-        {/*style={{*/}
-        {/*  width: '100%',*/}
-        {/*    height: '48'*/}
-        {/*}}*/}
-        {/*// options={options}*/}
-        {/*// size="large"*/}
-        {/*>*/}
-
-      {/*</AutoComplete>*/}
       </InputSearchContainer>
     )
 }

@@ -22,7 +22,6 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
     const [searchQuery, setSearchQuery] = useState<searchProps>({query: ''});
-    // const [showCartDetails, setShowCartDetails] = useState(false);
 
     const handleSearchContext = (value: string) => {
         const searchQuery = {
@@ -32,26 +31,10 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
     
     }
 
-    // const addProductToCart = (item: ProductProps) => {
-    //     setData((prevData) => [...prevData, item]);
-    // };
-
-    // const handleCartDetails = (state:boolean)=> {
-    //     console.log("chegou aqui no data context" + state)
-    //     setShowCartDetails(state)
-    // }
-
-    // const handleRemoveItemData = (itemId:string) => {
-    //     setData(data.filter(dataItem => dataItem.id !== itemId ))
-    // }
 
     return (
         <SearchContext.Provider value={{ searchQuery, setSearchQuery,
             handleSearchContext
-            // addProductToCart,
-            // handleCartDetails,
-            // showCartDetails,
-            // handleRemoveItemData
 
         }}>
             {children}
