@@ -6,7 +6,7 @@ import {ClientRequest} from "@/types/client-types";
 import {CreateOrder} from "@/app/api/actions/order";
 import {CreateClient} from "@/app/api/actions/client";
 import { format } from 'date-fns';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {ProductResponse} from "@/types/product-types";
 import PhoneInput from "antd-phone-input";
 import {RuleObject, StoreValue} from "rc-field-form/es/interface";
@@ -14,11 +14,13 @@ import {BRAZILIAN_STATES} from "@/shared/common/constatnts/brazilian-states";
 import {GetProductByName} from "@/app/api/actions/products";
 import {SearchCep} from "@/app/api/actions/seachCep";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from 'next/navigation';
 
 export interface PhoneProps {
     phoneWithAreaCode: string;
 }
 
+type LayoutType = Parameters<typeof Form>[0]['layout'];
 
 
 export default function SignUpClientComponent () {
@@ -26,8 +28,13 @@ export default function SignUpClientComponent () {
     const [phoneWithAreaCodeState, setPhoneWithAreaCodeState] = useState<string>('')
     const [cpfFieldState, setCpfState] = useState<string>('')
     const [typingTimeout, setTypingTimeout] = useState<number>(0)
+    const router = useRouter();
+    const [isCreatingClientState, setisCreatingClientState] = useState(false);
+    const [createClientFailedState, setCreateClientFailedState] = useState(false);
+    const [formLayout, setFormLayout] = useState<LayoutType>('horizontal');
     
-    const { login } = useAuth();
+    
+    const { login, isAuthenticated } = useAuth();
 
 
     const validateMessages = {
@@ -39,21 +46,42 @@ export default function SignUpClientComponent () {
 
     const onFinish: FormProps<ClientRequest>['onFinish'] = async (request) => {
 
-        if (request.birthDate) {
-            request.birthDate = format(new Date(request.birthDate), 'yyyy-MM-dd')
-        }
-       
-        if ('phoneWithAreaCode' in request) {
-            request.phone = [{
-                countryCode: '+55',
-                areaCode: (request as any).phoneWithAreaCode.areaCode,
-                number: (request as any).phoneWithAreaCode.phoneNumber
-            }]
+        setisCreatingClientState(true);
+
+        try {
+            if (request.birthDate) {
+                request.birthDate = format(new Date(request.birthDate), 'yyyy-MM-dd')
+            }
+           
+            if ('phoneWithAreaCode' in request) {
+                request.phone = [{
+                    countryCode: '+55',
+                    areaCode: (request as any).phoneWithAreaCode.areaCode,
+                    number: (request as any).phoneWithAreaCode.phoneNumber
+                }]
+                
+                delete (request as any).phoneWithAreaCode;
+            }
             
-            delete (request as any).phoneWithAreaCode;
+            const response = await CreateClient(request);
+            const userDataAuth  = {
+                userToken: response.clientToken,
+                userData: {
+                    userId: response.id,
+                    fullname: response.fullname,
+                    email: response.email
+                }
+            }
+            login(userDataAuth);
+            router.push('/');
+        }catch (error) {
+            setisCreatingClientState(false)
+            setCreateClientFailedState(true);
+            console.error('Erro ao cadastrar cliente:', error);
         }
-        
-        const response = await CreateClient(request);
+
+
+       
 
     };
 
@@ -136,13 +164,18 @@ export default function SignUpClientComponent () {
     };
 
 
+    useEffect(() => {
+            if (isAuthenticated) {
+                router.push('/');
+            }
+    }, );
 
     return (
         <CadastroContainer>
-            <h1>Novo Cadastro</h1>
+            <h1>{isAuthenticated && !isCreatingClientState ? 'Você já está logado.' : 'Novo Cadastro'}</h1>
             <Form
                 name="basic"
-                labelCol={{ span: 8 }}
+                labelCol={{ span: 7 }}
                 wrapperCol={{ span: 16 }}
                 style={{ maxWidth: 600 }}
                 initialValues={{ remember: true, gender: 'male'
@@ -152,13 +185,16 @@ export default function SignUpClientComponent () {
                 autoComplete="off"
                 form={form}
                 validateMessages={validateMessages}
+                layout="horizontal"
             >
                 <Form.Item<ClientRequest>
                     label="Nome Completo"
                     name="fullname"
                     rules={[{ required: true, message: 'Por favor, digite o seu nome completo' }]}
                 >
-                    <Input />
+                    <Input 
+                    disabled={isAuthenticated || isCreatingClientState}
+                    />
                 </Form.Item>
 
                 <Form.Item<ClientRequest>
@@ -181,6 +217,7 @@ export default function SignUpClientComponent () {
                             const onlyNumbers = e.target.value.replace(/\D/g, '');
                             form.setFieldsValue({ document: onlyNumbers });
                         }}
+                        disabled={isAuthenticated || isCreatingClientState}
                     />
                 </Form.Item>
 
@@ -189,8 +226,11 @@ export default function SignUpClientComponent () {
                     name="birthDate"
                     rules={[{ required: true, message: 'Por favor, digite a sua data de nascimento' }]}
                 >
-                    <DatePicker format="DD/MM/YYYY"
-                                onChange={onChangeDate} />
+                    <DatePicker 
+                        format="DD/MM/YYYY"
+                        onChange={onChangeDate} 
+                        disabled={isAuthenticated || isCreatingClientState}
+                    />
                 </Form.Item>
 
                 <Form.Item<ClientRequest>
@@ -206,6 +246,7 @@ export default function SignUpClientComponent () {
                             { value: 'female', label: 'Feminino' },
                             { value: 'outros', label: 'Outros' }
                         ]}
+                        disabled={isAuthenticated || isCreatingClientState}
                     />
                 </Form.Item>
 
@@ -219,6 +260,7 @@ export default function SignUpClientComponent () {
                     ]}
                 >
                     <PhoneInput
+                        disabled={isAuthenticated || isCreatingClientState}
                         disableDropdown
                     />
                 </Form.Item>
@@ -238,6 +280,7 @@ export default function SignUpClientComponent () {
                     <Input
                         maxLength={9}
                         onChange={handleChangeCep}
+                        disabled={isAuthenticated || isCreatingClientState}
                     
                     />
 
@@ -248,7 +291,9 @@ export default function SignUpClientComponent () {
                     name={['address', 'street']}
                     rules={[{ required: true, message: 'Por favor, digite o seu endereço' }]}
                 >
-                    <Input />
+                    <Input 
+                    disabled={isAuthenticated || isCreatingClientState}
+                    />
 
                 </Form.Item>
                 
@@ -257,7 +302,9 @@ export default function SignUpClientComponent () {
                     name={['address', 'number']}
                     rules={[{ required: true, message: 'Por favor, digite o seu número' }]}
                 >
-                    <Input />
+                    <Input 
+                    disabled={isAuthenticated || isCreatingClientState}
+                    />
 
                 </Form.Item>
 
@@ -266,7 +313,9 @@ export default function SignUpClientComponent () {
                     name={['address', 'neighborhood']}
                     rules={[{ required: true, message: 'Por favor, informe o seu bairro.' }]}
                 >
-                    <Input />
+                    <Input
+                    disabled={isAuthenticated || isCreatingClientState}
+                    />
 
                 </Form.Item>
 
@@ -276,7 +325,9 @@ export default function SignUpClientComponent () {
                     name={['address', 'city']}
                     rules={[{ required: true, message: 'Por favor, digite o nome da sua cidade' }]}
                 >
-                    <Input />
+                    <Input 
+                    disabled={isAuthenticated || isCreatingClientState}
+                    />
                 </Form.Item>
 
                 <Form.Item<ClientRequest>
@@ -287,6 +338,7 @@ export default function SignUpClientComponent () {
                     <Select
                         style={{ width: 120 }}
                         options={BRAZILIAN_STATES}
+                        disabled={isAuthenticated || isCreatingClientState}
                     />
                 </Form.Item>
 
@@ -295,7 +347,9 @@ export default function SignUpClientComponent () {
                     name={['address', 'complement']}
                     rules={[{ required: false }]}
                 >
-                    <Input />
+                    <Input 
+                        disabled={isAuthenticated || isCreatingClientState}
+                    />
 
                 </Form.Item>
 
@@ -304,22 +358,34 @@ export default function SignUpClientComponent () {
                     name="email"
                     rules={[{ required: true, message: 'Por favor, digite o seu e-mail' }, { type: 'email' }]}
                 >
-                    <Input />
+                    <Input 
+                        disabled={isAuthenticated || isCreatingClientState}
+                    />
                 </Form.Item>
                 
                 
                 <Form.Item<ClientRequest>
-                    label="Password"
+                    label="Senha"
                     name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Por favor, digite a sua senha!' }]}
                 >
-                    <Input.Password />
+                    <Input.Password 
+                        disabled={isAuthenticated || isCreatingClientState}
+                    />
                 </Form.Item>
 
-                <Form.Item label={null}>
-                    <Button type="primary" htmlType="submit">
-                        Cadastrar
+                <Form.Item label={null} style={{ textAlign: 'right' }}>
+                    <Button 
+                        type="primary" 
+                        htmlType="submit"
+                        disabled={isCreatingClientState || isAuthenticated}
+                        >
+                        {isCreatingClientState ? 'Criando...' : 'Cadastrar'}
                     </Button>
+                    {createClientFailedState && 
+                        <p style={{color: 'red'}}>
+                        Falha ao criar cliente, verifique os dados informados e tente novamente.
+                        </p>}
                 </Form.Item>
             </Form>
         </CadastroContainer>

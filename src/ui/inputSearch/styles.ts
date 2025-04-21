@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const InputSearchContainer = styled.div`
-    width: 316px;
+    width: 400px;
     height: 48px;
     display: flex;
     align-items: center;

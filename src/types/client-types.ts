@@ -30,6 +30,7 @@ export interface ClientAddress {
 }
 
 export interface ClientResponse {
+    id: number;
     fullname: string;
     email: string;
     document: string;
