@@ -39,6 +39,7 @@ export interface PagarMe {
 
 
 export interface OrderRequest {
+    clientId:number;
     userId: number;
     totalValue: number;
     invoiceNumber: string;

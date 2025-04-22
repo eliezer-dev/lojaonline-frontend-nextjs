@@ -15,6 +15,7 @@ interface AuthContextData {
 
 interface UserStore {
     fullname: string
+    id: number
 }
 
 // Cria o contexto
@@ -55,7 +56,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const fetchClient = async (clientId:number) => {
         const client = await GetClientById(clientId);
         setUser({
-            fullname: client.fullname
+            fullname: client.fullname,
+            id: client.id
         });
     }
 

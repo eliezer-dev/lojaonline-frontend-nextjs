@@ -23,6 +23,7 @@ import Button from "@/ui/button/button";
 import { OrderRequest } from "@/types/order-types";
 import { CreateOrder } from "@/app/api/actions/order";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 export interface PriceStripe {
     price: string
@@ -64,6 +65,7 @@ export function ItemSelected(props : ItemSelectedProps) {
 export default function CartDetails() {
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
     const {isCartActive, handleCartDetails, data, handleRemoveItemData} = useData();
+    const { login, isAuthenticated, user } = useAuth();
     const router = useRouter();    
 
     const getTotalPrice = () => {
@@ -89,6 +91,7 @@ export default function CartDetails() {
 
                 let orderRequest = {} as OrderRequest;
                 orderRequest.userId = 1
+                orderRequest.clientId = user?.id!
                 orderRequest.totalValue = getTotalPrice()
                 orderRequest.orderItems = []
 
